@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../application/calendar/calendar_bloc.dart';
-import '../../application/calendar/calendar_state.dart';
-import '../../application/event/event_bloc.dart';
-import '../../application/event/event_state.dart';
-import '../../domain/entities/calendar_event.dart';
-import '../helpers/date_utils.dart';
-import '../helpers/color_utils.dart';
+
+import '../../../application/calendar/calendar_bloc.dart';
+import '../../../application/calendar/calendar_state.dart';
+import '../../../application/event/event_bloc.dart';
+import '../../../application/event/event_state.dart';
+import '../../../domain/entities/calendar_event.dart';
+import '../../helpers/color_utils.dart';
+import '../../helpers/date_utils.dart';
+
 
 /// العرض اليومي — جدول زمني مفصل لـ 24 ساعة
 class DailyView extends StatelessWidget {

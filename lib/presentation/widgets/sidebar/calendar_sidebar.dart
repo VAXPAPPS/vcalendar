@@ -1,13 +1,13 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../application/calendar/calendar_bloc.dart';
-import '../../application/calendar/calendar_event.dart';
-import '../../application/calendar/calendar_state.dart';
-import '../../application/category/category_bloc.dart';
-import '../../application/category/category_state.dart';
-import '../helpers/date_utils.dart';
-import '../helpers/color_utils.dart';
+import '/../../application/calendar/calendar_bloc.dart';
+import '/../../application/calendar/calendar_event.dart';
+import '/../../application/calendar/calendar_state.dart';
+import '/../../application/category/category_bloc.dart';
+import '/../../application/category/category_state.dart';
+import '../../helpers/date_utils.dart';
+import '../../helpers/color_utils.dart';
 
 /// الشريط الجانبي — تقويم مصغر + تصنيفات
 class CalendarSidebar extends StatelessWidget {

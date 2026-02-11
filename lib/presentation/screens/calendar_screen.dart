@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:vcalendar/presentation/widgets/calendar_views/daily_view.dart';
+import 'package:vcalendar/presentation/widgets/calendar_views/monthly_view.dart';
+import 'package:vcalendar/presentation/widgets/calendar_views/weekly_view.dart';
+import 'package:vcalendar/presentation/widgets/event/event_dialog.dart';
+import 'package:vcalendar/presentation/widgets/sidebar/calendar_sidebar.dart';
 import '../../application/calendar/calendar_bloc.dart';
 import '../../application/calendar/calendar_event.dart';
 import '../../application/calendar/calendar_state.dart';
@@ -8,13 +13,8 @@ import '../../application/event/event_event.dart';
 import '../../application/event/event_state.dart';
 import '../../application/category/category_bloc.dart';
 import '../../application/category/category_event.dart';
-import '../../core/venom_layout.dart';
 import '../helpers/date_utils.dart';
-import 'calendar_views/monthly_view.dart';
-import 'calendar_views/weekly_view.dart';
-import 'calendar_views/daily_view.dart';
-import 'sidebar/calendar_sidebar.dart';
-import 'event/event_dialog.dart';
+
 
 /// الشاشة الرئيسية للتقويم
 class CalendarScreen extends StatefulWidget {

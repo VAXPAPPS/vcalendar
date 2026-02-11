@@ -2,12 +2,11 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
-import '../../application/category/category_bloc.dart';
-import '../../application/category/category_state.dart';
-import '../../domain/entities/calendar_event.dart';
-import '../../domain/entities/event_category.dart';
-import '../helpers/color_utils.dart';
-import '../helpers/date_utils.dart';
+import '/../../application/category/category_bloc.dart';
+import '/../../application/category/category_state.dart';
+import '/../../domain/entities/calendar_event.dart';
+import '../../helpers/color_utils.dart';
+import '../../helpers/date_utils.dart';
 
 /// حوار إضافة/تعديل حدث كامل
 class EventDialog extends StatefulWidget {

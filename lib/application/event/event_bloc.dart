@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../../domain/entities/calendar_event.dart';
 import '../../domain/repositories/event_repository.dart';
 import 'event_event.dart';
 import 'event_state.dart';
@@ -134,8 +135,8 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
   }
 
   /// تجميع الأحداث حسب التاريخ (لأداء أفضل عند الرسم)
-  Map<String, List<dynamic>> _groupByDate(List<dynamic> events) {
-    final map = <String, List<dynamic>>{};
+  Map<String, List<CalendarEvent>> _groupByDate(List<CalendarEvent> events) {
+    final map = <String, List<CalendarEvent>>{};
     for (final event in events) {
       final key =
           '${event.startTime.year}-${event.startTime.month.toString().padLeft(2, '0')}-${event.startTime.day.toString().padLeft(2, '0')}';

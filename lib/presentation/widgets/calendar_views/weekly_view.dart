@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../application/calendar/calendar_bloc.dart';
-import '../../application/calendar/calendar_state.dart';
-import '../../application/event/event_bloc.dart';
-import '../../application/event/event_state.dart';
-import '../../domain/entities/calendar_event.dart';
-import '../helpers/date_utils.dart';
-import '../helpers/color_utils.dart';
+import '/../../application/calendar/calendar_bloc.dart';
+import '/../../application/calendar/calendar_state.dart';
+import '/../../application/event/event_bloc.dart';
+import '/../../application/event/event_state.dart';
+import '/../../domain/entities/calendar_event.dart';
+import '../../helpers/date_utils.dart';
+import '../../helpers/color_utils.dart';
 
 /// العرض الأسبوعي — جدول زمني بالساعات لـ 7 أيام
 class WeeklyView extends StatelessWidget {

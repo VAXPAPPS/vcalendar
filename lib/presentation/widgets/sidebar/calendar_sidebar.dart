@@ -20,7 +20,7 @@ class CalendarSidebar extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         border: Border(
-          right: BorderSide(color: Colors.white.withOpacity(0.06), width: 1),
+          right: BorderSide(color: Colors.white.withValues(alpha: 0.06), width: 1),
         ),
       ),
       child: Column(
@@ -56,10 +56,10 @@ class _TodayButton extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
             decoration: BoxDecoration(
-              color: const Color(0xFF4A90D9).withOpacity(0.15),
+              color: const Color(0xFF4A90D9).withValues(alpha: 0.15),
               borderRadius: BorderRadius.circular(14),
               border: Border.all(
-                color: const Color(0xFF4A90D9).withOpacity(0.3),
+                color: const Color(0xFF4A90D9).withValues(alpha: 0.3),
               ),
             ),
             child: Row(
@@ -97,7 +97,7 @@ class _TodayButton extends StatelessWidget {
                     Text(
                       CalendarDateUtils.formatMonthYear(now),
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.5),
+                        color: Colors.white.withValues(alpha: 0.5),
                         fontSize: 11,
                       ),
                     ),
@@ -163,7 +163,7 @@ class _MiniCalendar extends StatelessWidget {
                       n[0],
                       style: TextStyle(
                         fontSize: 10,
-                        color: Colors.white.withOpacity(0.35),
+                        color: Colors.white.withValues(alpha: 0.35),
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -202,7 +202,7 @@ class _MiniCalendar extends StatelessWidget {
                       color: isToday
                           ? const Color(0xFF4A90D9)
                           : isSelected
-                              ? Colors.white.withOpacity(0.1)
+                              ? Colors.white.withValues(alpha: 0.1)
                               : Colors.transparent,
                     ),
                     child: Center(
@@ -213,7 +213,7 @@ class _MiniCalendar extends StatelessWidget {
                           fontWeight: isToday ? FontWeight.bold : FontWeight.w400,
                           color: isToday
                               ? Colors.white
-                              : Colors.white.withOpacity(0.7),
+                              : Colors.white.withValues(alpha: 0.7),
                         ),
                       ),
                     ),
@@ -241,7 +241,7 @@ class _MiniNavButton extends StatelessWidget {
       onTap: onTap,
       child: Padding(
         padding: const EdgeInsets.all(4),
-        child: Icon(icon, size: 16, color: Colors.white.withOpacity(0.6)),
+        child: Icon(icon, size: 16, color: Colors.white.withValues(alpha: 0.6)),
       ),
     );
   }
@@ -265,7 +265,7 @@ class _CategorySection extends StatelessWidget {
               style: TextStyle(
                 fontSize: 12,
                 fontWeight: FontWeight.w600,
-                color: Colors.white.withOpacity(0.5),
+                color: Colors.white.withValues(alpha: 0.5),
                 letterSpacing: 0.5,
               ),
             ),
@@ -289,7 +289,7 @@ class _CategorySection extends StatelessWidget {
                         '${cat.icon} ${cat.name}',
                         style: TextStyle(
                           fontSize: 12,
-                          color: Colors.white.withOpacity(0.75),
+                          color: Colors.white.withValues(alpha: 0.75),
                         ),
                       ),
                     ),

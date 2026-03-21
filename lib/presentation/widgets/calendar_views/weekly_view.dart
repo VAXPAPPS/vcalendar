@@ -89,7 +89,7 @@ class _WeekHeader extends StatelessWidget {
                     fontSize: 11,
                     color: isToday
                         ? const Color(0xFF4A90D9)
-                        : Colors.white.withOpacity(0.5),
+                        : Colors.white.withValues(alpha: 0.5),
                   ),
                 ),
                 const SizedBox(height: 4),
@@ -106,7 +106,7 @@ class _WeekHeader extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: isToday ? FontWeight.bold : FontWeight.w400,
-                        color: isToday ? Colors.white : Colors.white.withOpacity(0.8),
+                        color: isToday ? Colors.white : Colors.white.withValues(alpha: 0.8),
                       ),
                     ),
                   ),
@@ -140,7 +140,7 @@ class _TimeColumn extends StatelessWidget {
                   '${hour.toString().padLeft(2, '0')}:00',
                   style: TextStyle(
                     fontSize: 10,
-                    color: Colors.white.withOpacity(0.35),
+                    color: Colors.white.withValues(alpha: 0.35),
                   ),
                 ),
               ),
@@ -169,7 +169,7 @@ class _DayColumn extends StatelessWidget {
     return Container(
       decoration: BoxDecoration(
         border: Border(
-          left: BorderSide(color: Colors.white.withOpacity(0.05), width: 1),
+          left: BorderSide(color: Colors.white.withValues(alpha: 0.05), width: 1),
         ),
       ),
       child: Stack(
@@ -182,7 +182,7 @@ class _DayColumn extends StatelessWidget {
                 decoration: BoxDecoration(
                   border: Border(
                     bottom: BorderSide(
-                      color: Colors.white.withOpacity(0.05),
+                      color: Colors.white.withValues(alpha: 0.05),
                       width: 0.5,
                     ),
                   ),
@@ -209,7 +209,7 @@ class _DayColumn extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(4),
                 decoration: BoxDecoration(
-                  color: ColorUtils.fromValue(event.colorValue).withOpacity(0.8),
+                  color: ColorUtils.fromValue(event.colorValue).withValues(alpha: 0.8),
                   borderRadius: BorderRadius.circular(6),
                   border: Border.all(
                     color: ColorUtils.fromValue(event.colorValue),

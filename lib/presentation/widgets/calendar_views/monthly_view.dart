@@ -97,7 +97,7 @@ class _WeekDayHeader extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.w600,
-                  color: Colors.white.withOpacity(0.5),
+                  color: Colors.white.withValues(alpha: 0.5),
                   letterSpacing: 0.5,
                 ),
               ),
@@ -139,14 +139,14 @@ class _DayCell extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
           color: isSelected
-              ? Colors.white.withOpacity(0.12)
+              ? Colors.white.withValues(alpha: 0.12)
               : isToday
-                  ? Colors.white.withOpacity(0.06)
+                  ? Colors.white.withValues(alpha: 0.06)
                   : Colors.transparent,
           border: isToday
               ? Border.all(color: const Color(0xFF4A90D9), width: 1.5)
               : isSelected
-                  ? Border.all(color: Colors.white.withOpacity(0.2), width: 1)
+                  ? Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1)
                   : null,
         ),
         child: Padding(
@@ -175,8 +175,8 @@ class _DayCell extends StatelessWidget {
                         color: isToday
                             ? Colors.white
                             : isCurrentMonth
-                                ? Colors.white.withOpacity(0.9)
-                                : Colors.white.withOpacity(0.25),
+                                ? Colors.white.withValues(alpha: 0.9)
+                                : Colors.white.withValues(alpha: 0.25),
                       ),
                     ),
                   ),
@@ -249,9 +249,9 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
           child: Container(
             padding: const EdgeInsets.all(24),
             decoration: BoxDecoration(
-              color: Colors.white.withOpacity(0.1),
+              color: Colors.white.withValues(alpha: 0.1),
               borderRadius: BorderRadius.circular(20),
-              border: Border.all(color: Colors.white.withOpacity(0.15)),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.15)),
             ),
             child: Column(
               mainAxisSize: MainAxisSize.min,
@@ -272,9 +272,9 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'عنوان الحدث...',
-                    hintStyle: TextStyle(color: Colors.white.withOpacity(0.4)),
+                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
                     filled: true,
-                    fillColor: Colors.white.withOpacity(0.07),
+                    fillColor: Colors.white.withValues(alpha: 0.07),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(12),
                       borderSide: BorderSide.none,
@@ -291,7 +291,7 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
                       child: Text(
                         'إلغاء',
                         style:
-                            TextStyle(color: Colors.white.withOpacity(0.6)),
+                            TextStyle(color: Colors.white.withValues(alpha: 0.6)),
                       ),
                     ),
                     const SizedBox(width: 8),

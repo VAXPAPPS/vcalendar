@@ -116,18 +116,21 @@ class _CalendarScreenState extends State<CalendarScreen> {
 
   void _showEventDialog(BuildContext context) {
     final calState = context.read<CalendarBloc>().state;
+    final categoryBloc = context.read<CategoryBloc>();
+    final eventBloc = context.read<EventBloc>();
     showDialog(
       context: context,
       builder: (_) => MultiBlocProvider(
         providers: [
-          BlocProvider.value(value: context.read<CategoryBloc>()),
+          BlocProvider.value(value: categoryBloc),
         ],
         child: EventDialog(initialDate: calState.selectedDate),
       ),
     ).then((result) {
+      if (!mounted) return;
       if (result != null && result is Map) {
         if (result['action'] == 'save') {
-          context.read<EventBloc>().add(AddEvent(result['event']));
+          eventBloc.add(AddEvent(result['event']));
         }
       }
     });
@@ -198,7 +201,7 @@ class _CalendarToolbar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(10),
                     boxShadow: [
                       BoxShadow(
-                        color: const Color(0xFF4A90D9).withOpacity(0.3),
+                        color: const Color(0xFF4A90D9).withValues(alpha: 0.3),
                         blurRadius: 12,
                         offset: const Offset(0, 4),
                       ),
@@ -244,10 +247,10 @@ class _ToolbarBtn extends StatelessWidget {
         width: 30,
         height: 30,
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(0.06),
+          color: Colors.white.withValues(alpha: 0.06),
           borderRadius: BorderRadius.circular(8),
         ),
-        child: Icon(icon, size: 18, color: Colors.white.withOpacity(0.7)),
+        child: Icon(icon, size: 18, color: Colors.white.withValues(alpha: 0.7)),
       ),
     );
   }
@@ -263,7 +266,7 @@ class _ViewSwitcher extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.all(3),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.06),
+        color: Colors.white.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(10),
       ),
       child: Row(
@@ -283,12 +286,12 @@ class _ViewSwitcher extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 6),
               decoration: BoxDecoration(
                 color: isActive
-                    ? const Color(0xFF4A90D9).withOpacity(0.2)
+                    ? const Color(0xFF4A90D9).withValues(alpha: 0.2)
                     : Colors.transparent,
                 borderRadius: BorderRadius.circular(8),
                 border: isActive
                     ? Border.all(
-                        color: const Color(0xFF4A90D9).withOpacity(0.3))
+                        color: const Color(0xFF4A90D9).withValues(alpha: 0.3))
                     : null,
               ),
               child: Text(
@@ -298,7 +301,7 @@ class _ViewSwitcher extends StatelessWidget {
                   fontWeight: isActive ? FontWeight.w600 : FontWeight.w400,
                   color: isActive
                       ? Colors.white
-                      : Colors.white.withOpacity(0.5),
+                      : Colors.white.withValues(alpha: 0.5),
                 ),
               ),
             ),

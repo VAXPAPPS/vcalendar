@@ -36,7 +36,7 @@ class DailyView extends StatelessWidget {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
-                      color: Colors.white.withOpacity(0.9),
+                      color: Colors.white.withValues(alpha: 0.9),
                     ),
                   ),
                 ),
@@ -62,7 +62,7 @@ class DailyView extends StatelessWidget {
                                       '${hour.toString().padLeft(2, '0')}:00',
                                       style: TextStyle(
                                         fontSize: 12,
-                                        color: Colors.white.withOpacity(0.35),
+                                        color: Colors.white.withValues(alpha: 0.35),
                                         fontWeight: FontWeight.w400,
                                       ),
                                     ),
@@ -84,7 +84,7 @@ class DailyView extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       border: Border(
                                         bottom: BorderSide(
-                                          color: Colors.white.withOpacity(0.06),
+                                          color: Colors.white.withValues(alpha: 0.06),
                                           width: 0.5,
                                         ),
                                       ),
@@ -146,7 +146,7 @@ class DailyView extends StatelessWidget {
                                     decoration: BoxDecoration(
                                       color: ColorUtils.fromValue(
                                               event.colorValue)
-                                          .withOpacity(0.85),
+                                          .withValues(alpha: 0.85),
                                       borderRadius: BorderRadius.circular(10),
                                       border: Border.all(
                                         color: ColorUtils.fromValue(
@@ -157,7 +157,7 @@ class DailyView extends StatelessWidget {
                                         BoxShadow(
                                           color: ColorUtils.fromValue(
                                                   event.colorValue)
-                                              .withOpacity(0.3),
+                                              .withValues(alpha: 0.3),
                                           blurRadius: 8,
                                           offset: const Offset(0, 2),
                                         ),
@@ -182,7 +182,7 @@ class DailyView extends StatelessWidget {
                                             style: TextStyle(
                                               fontSize: 11,
                                               color:
-                                                  Colors.white.withOpacity(0.8),
+                                                  Colors.white.withValues(alpha: 0.8),
                                             ),
                                           ),
                                         if (event.description.isNotEmpty &&
@@ -195,7 +195,7 @@ class DailyView extends StatelessWidget {
                                               style: TextStyle(
                                                 fontSize: 11,
                                                 color: Colors.white
-                                                    .withOpacity(0.7),
+                                                    .withValues(alpha: 0.7),
                                               ),
                                               maxLines: 2,
                                               overflow: TextOverflow.ellipsis,

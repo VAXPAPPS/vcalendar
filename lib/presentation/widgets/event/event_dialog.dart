@@ -77,12 +77,12 @@ class _EventDialogState extends State<EventDialog> {
             width: 420,
             padding: const EdgeInsets.all(28),
             decoration: BoxDecoration(
-              color: const Color(0xFF1A1A2E).withOpacity(0.85),
+              color: const Color(0xFF1A1A2E).withValues(alpha: 0.85),
               borderRadius: BorderRadius.circular(24),
-              border: Border.all(color: Colors.white.withOpacity(0.1)),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.4),
+                  color: Colors.black.withValues(alpha: 0.4),
                   blurRadius: 30,
                   offset: const Offset(0, 10),
                 ),
@@ -149,7 +149,7 @@ class _EventDialogState extends State<EventDialog> {
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 8),
                           child: Icon(Icons.arrow_forward,
-                              size: 16, color: Colors.white.withOpacity(0.3)),
+                              size: 16, color: Colors.white.withValues(alpha: 0.3)),
                         ),
                         Expanded(
                           child: GestureDetector(
@@ -170,12 +170,12 @@ class _EventDialogState extends State<EventDialog> {
                       Switch(
                         value: _isAllDay,
                         onChanged: (v) => setState(() => _isAllDay = v),
-                        activeColor: const Color(0xFF4A90D9),
+                        activeThumbColor: const Color(0xFF4A90D9),
                       ),
                       Text(
                         'طوال اليوم',
                         style: TextStyle(
-                          color: Colors.white.withOpacity(0.7),
+                          color: Colors.white.withValues(alpha: 0.7),
                           fontSize: 13,
                         ),
                       ),
@@ -207,12 +207,12 @@ class _EventDialogState extends State<EventDialog> {
                                 borderRadius: BorderRadius.circular(20),
                                 color: isSelected
                                     ? ColorUtils.fromValue(cat.colorValue)
-                                        .withOpacity(0.3)
-                                    : Colors.white.withOpacity(0.05),
+                                        .withValues(alpha: 0.3)
+                                    : Colors.white.withValues(alpha: 0.05),
                                 border: Border.all(
                                   color: isSelected
                                       ? ColorUtils.fromValue(cat.colorValue)
-                                      : Colors.white.withOpacity(0.1),
+                                      : Colors.white.withValues(alpha: 0.1),
                                 ),
                               ),
                               child: Text(
@@ -221,7 +221,7 @@ class _EventDialogState extends State<EventDialog> {
                                   fontSize: 12,
                                   color: isSelected
                                       ? Colors.white
-                                      : Colors.white.withOpacity(0.6),
+                                      : Colors.white.withValues(alpha: 0.6),
                                 ),
                               ),
                             ),
@@ -256,7 +256,7 @@ class _EventDialogState extends State<EventDialog> {
                                 ? [
                                     BoxShadow(
                                       color:
-                                          ColorUtils.fromValue(c).withOpacity(0.5),
+                                          ColorUtils.fromValue(c).withValues(alpha: 0.5),
                                       blurRadius: 8,
                                     ),
                                   ]
@@ -291,12 +291,12 @@ class _EventDialogState extends State<EventDialog> {
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
                             color: isSelected
-                                ? const Color(0xFF4A90D9).withOpacity(0.3)
-                                : Colors.white.withOpacity(0.05),
+                                ? const Color(0xFF4A90D9).withValues(alpha: 0.3)
+                                : Colors.white.withValues(alpha: 0.05),
                             border: Border.all(
                               color: isSelected
                                   ? const Color(0xFF4A90D9)
-                                  : Colors.white.withOpacity(0.1),
+                                  : Colors.white.withValues(alpha: 0.1),
                             ),
                           ),
                           child: Text(
@@ -305,7 +305,7 @@ class _EventDialogState extends State<EventDialog> {
                               fontSize: 12,
                               color: isSelected
                                   ? Colors.white
-                                  : Colors.white.withOpacity(0.6),
+                                  : Colors.white.withValues(alpha: 0.6),
                             ),
                           ),
                         ),
@@ -330,7 +330,7 @@ class _EventDialogState extends State<EventDialog> {
                         onPressed: () => Navigator.pop(context),
                         child: Text('إلغاء',
                             style: TextStyle(
-                                color: Colors.white.withOpacity(0.5))),
+                                color: Colors.white.withValues(alpha: 0.5))),
                       ),
                       const SizedBox(width: 8),
                       ElevatedButton(
@@ -374,10 +374,10 @@ class _EventDialogState extends State<EventDialog> {
       style: const TextStyle(color: Colors.white, fontSize: 14),
       decoration: InputDecoration(
         hintText: hint,
-        hintStyle: TextStyle(color: Colors.white.withOpacity(0.3)),
-        prefixIcon: Icon(icon, size: 18, color: Colors.white.withOpacity(0.4)),
+        hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.3)),
+        prefixIcon: Icon(icon, size: 18, color: Colors.white.withValues(alpha: 0.4)),
         filled: true,
-        fillColor: Colors.white.withOpacity(0.06),
+        fillColor: Colors.white.withValues(alpha: 0.06),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(14),
           borderSide: BorderSide.none,
@@ -477,7 +477,7 @@ class _SectionLabel extends StatelessWidget {
       style: TextStyle(
         fontSize: 12,
         fontWeight: FontWeight.w600,
-        color: Colors.white.withOpacity(0.45),
+        color: Colors.white.withValues(alpha: 0.45),
         letterSpacing: 0.3,
       ),
     );
@@ -495,20 +495,20 @@ class _InfoChip extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.06),
+        color: Colors.white.withValues(alpha: 0.06),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.08)),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.08)),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: Colors.white.withOpacity(0.5)),
+          Icon(icon, size: 16, color: Colors.white.withValues(alpha: 0.5)),
           const SizedBox(width: 8),
           Text(
             text,
             style: TextStyle(
               fontSize: 13,
-              color: Colors.white.withOpacity(0.8),
+              color: Colors.white.withValues(alpha: 0.8),
             ),
           ),
         ],

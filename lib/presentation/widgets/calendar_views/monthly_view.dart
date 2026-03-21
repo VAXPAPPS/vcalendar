@@ -258,7 +258,7 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  'إضافة حدث — ${CalendarDateUtils.formatFullDate(widget.date)}',
+                  'Add Event - ${CalendarDateUtils.formatFullDate(widget.date)}',
                   style: const TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -271,7 +271,7 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
                   autofocus: true,
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
-                    hintText: 'عنوان الحدث...',
+                    hintText: 'Event title...',
                     hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
                     filled: true,
                     fillColor: Colors.white.withValues(alpha: 0.07),
@@ -289,7 +289,7 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
                     TextButton(
                       onPressed: () => Navigator.pop(context),
                       child: Text(
-                        'إلغاء',
+                        'Cancel',
                         style:
                             TextStyle(color: Colors.white.withValues(alpha: 0.6)),
                       ),
@@ -303,7 +303,7 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text('إضافة',
+                      child: const Text('Add',
                           style: TextStyle(color: Colors.white)),
                     ),
                   ],

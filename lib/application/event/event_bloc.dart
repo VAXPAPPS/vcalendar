@@ -64,7 +64,7 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
   ) async {
     try {
       await _repository.addEvent(event.event);
-      emit(const EventOperationSuccess('تمت إضافة الحدث بنجاح'));
+      emit(const EventOperationSuccess('Event added successfully'));
       await _reloadEvents(emit);
     } catch (e) {
       emit(EventError(e.toString()));
@@ -77,7 +77,7 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
   ) async {
     try {
       await _repository.updateEvent(event.event);
-      emit(const EventOperationSuccess('تم تحديث الحدث بنجاح'));
+      emit(const EventOperationSuccess('Event updated successfully'));
       await _reloadEvents(emit);
     } catch (e) {
       emit(EventError(e.toString()));
@@ -90,7 +90,7 @@ class EventBloc extends Bloc<EventBlocEvent, EventState> {
   ) async {
     try {
       await _repository.deleteEvent(event.eventId);
-      emit(const EventOperationSuccess('تم حذف الحدث بنجاح'));
+      emit(const EventOperationSuccess('Event deleted successfully'));
       await _reloadEvents(emit);
     } catch (e) {
       emit(EventError(e.toString()));

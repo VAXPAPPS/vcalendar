@@ -30,11 +30,11 @@ class EventCategory extends Equatable {
 
   /// التصنيفات الافتراضية
   static const List<EventCategory> defaults = [
-    EventCategory(id: 'work', name: 'عمل', colorValue: 0xFF4A90D9, icon: '💼'),
-    EventCategory(id: 'personal', name: 'شخصي', colorValue: 0xFF28C840, icon: '👤'),
-    EventCategory(id: 'meeting', name: 'اجتماع', colorValue: 0xFFFF9500, icon: '🤝'),
-    EventCategory(id: 'important', name: 'مهم', colorValue: 0xFFFF5F57, icon: '⭐'),
-    EventCategory(id: 'default', name: 'عام', colorValue: 0xFF7AB1FF, icon: '📅'),
+    EventCategory(id: 'work', name: 'Work', colorValue: 0xFF4A90D9, icon: '💼'),
+    EventCategory(id: 'personal', name: 'Personal', colorValue: 0xFF28C840, icon: '👤'),
+    EventCategory(id: 'meeting', name: 'Meeting', colorValue: 0xFFFF9500, icon: '🤝'),
+    EventCategory(id: 'important', name: 'Important', colorValue: 0xFFFF5F57, icon: '⭐'),
+    EventCategory(id: 'default', name: 'General', colorValue: 0xFF7AB1FF, icon: '📅'),
   ];
 
   @override

@@ -95,7 +95,7 @@ class _EventDialogState extends State<EventDialog> {
                 children: [
                   // العنوان
                   Text(
-                    isEdit ? 'تعديل الحدث' : 'حدث جديد',
+                    isEdit ? 'Edit Event' : 'New Event',
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
@@ -107,7 +107,7 @@ class _EventDialogState extends State<EventDialog> {
                   // حقل العنوان
                   _buildField(
                     controller: _titleController,
-                    hint: 'عنوان الحدث',
+                    hint: 'Event title',
                     icon: Icons.title,
                   ),
                   const SizedBox(height: 12),
@@ -115,14 +115,14 @@ class _EventDialogState extends State<EventDialog> {
                   // حقل الوصف
                   _buildField(
                     controller: _descController,
-                    hint: 'وصف (اختياري)',
+                    hint: 'Description (optional)',
                     icon: Icons.notes,
                     maxLines: 3,
                   ),
                   const SizedBox(height: 16),
 
                   // التاريخ
-                  _SectionLabel(text: 'التاريخ والوقت'),
+                  _SectionLabel(text: 'Date & Time'),
                   const SizedBox(height: 8),
                   GestureDetector(
                     onTap: _pickDate,
@@ -173,7 +173,7 @@ class _EventDialogState extends State<EventDialog> {
                         activeThumbColor: const Color(0xFF4A90D9),
                       ),
                       Text(
-                        'طوال اليوم',
+                        'All day',
                         style: TextStyle(
                           color: Colors.white.withValues(alpha: 0.7),
                           fontSize: 13,
@@ -184,7 +184,7 @@ class _EventDialogState extends State<EventDialog> {
                   const SizedBox(height: 16),
 
                   // التصنيف
-                  _SectionLabel(text: 'التصنيف'),
+                  _SectionLabel(text: 'Category'),
                   const SizedBox(height: 8),
                   BlocBuilder<CategoryBloc, CategoryState>(
                     builder: (context, catState) {
@@ -233,7 +233,7 @@ class _EventDialogState extends State<EventDialog> {
                   const SizedBox(height: 16),
 
                   // اختيار اللون
-                  _SectionLabel(text: 'اللون'),
+                  _SectionLabel(text: 'Color'),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
@@ -269,18 +269,18 @@ class _EventDialogState extends State<EventDialog> {
                   const SizedBox(height: 16),
 
                   // التكرار
-                  _SectionLabel(text: 'التكرار'),
+                  _SectionLabel(text: 'Repeat'),
                   const SizedBox(height: 8),
                   Wrap(
                     spacing: 8,
                     children: RecurrenceType.values.map((r) {
                       final isSelected = r == _recurrence;
                       final labels = {
-                        RecurrenceType.none: 'بدون',
-                        RecurrenceType.daily: 'يومي',
-                        RecurrenceType.weekly: 'أسبوعي',
-                        RecurrenceType.monthly: 'شهري',
-                        RecurrenceType.yearly: 'سنوي',
+                        RecurrenceType.none: 'None',
+                        RecurrenceType.daily: 'Daily',
+                        RecurrenceType.weekly: 'Weekly',
+                        RecurrenceType.monthly: 'Monthly',
+                        RecurrenceType.yearly: 'Yearly',
                       };
                       return GestureDetector(
                         onTap: () => setState(() => _recurrence = r),
@@ -322,13 +322,13 @@ class _EventDialogState extends State<EventDialog> {
                         TextButton(
                           onPressed: () =>
                               Navigator.pop(context, {'action': 'delete'}),
-                          child: const Text('حذف',
+                          child: const Text('Delete',
                               style: TextStyle(color: Color(0xFFFF5F57))),
                         ),
                       const Spacer(),
                       TextButton(
                         onPressed: () => Navigator.pop(context),
-                        child: Text('إلغاء',
+                        child: Text('Cancel',
                             style: TextStyle(
                                 color: Colors.white.withValues(alpha: 0.5))),
                       ),
@@ -344,7 +344,7 @@ class _EventDialogState extends State<EventDialog> {
                           ),
                         ),
                         child: Text(
-                          isEdit ? 'حفظ التعديلات' : 'إضافة',
+                          isEdit ? 'Save Changes' : 'Add',
                           style: const TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,

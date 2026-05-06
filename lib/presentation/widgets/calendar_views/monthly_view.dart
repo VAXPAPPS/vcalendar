@@ -5,12 +5,14 @@ import 'package:uuid/uuid.dart';
 import '/../../application/calendar/calendar_bloc.dart';
 import '/../../application/calendar/calendar_event.dart';
 import '/../../application/calendar/calendar_state.dart';
+import '/../../application/category/category_bloc.dart';
 import '/../../application/event/event_bloc.dart';
 import '/../../application/event/event_event.dart';
 import '/../../application/event/event_state.dart';
 import '/../../domain/entities/calendar_event.dart';
 import './../../helpers/date_utils.dart';
 import '../../helpers/color_utils.dart';
+import '../event/event_dialog.dart';
 
 /// العرض الشهري — شبكة 7×6 مع الأحداث
 class MonthlyView extends StatelessWidget {
@@ -26,8 +28,9 @@ class MonthlyView extends StatelessWidget {
         return BlocBuilder<EventBloc, EventState>(
           buildWhen: (prev, curr) => curr is EventLoaded,
           builder: (context, eventState) {
-            final eventsByDate =
-                eventState is EventLoaded ? eventState.eventsByDate : {};
+            final eventsByDate = eventState is EventLoaded
+                ? eventState.eventsByDate
+                : {};
 
             return Column(
               children: [
@@ -40,17 +43,17 @@ class MonthlyView extends StatelessWidget {
                     physics: const NeverScrollableScrollPhysics(),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 7,
-                      childAspectRatio: 1.2,
-                      crossAxisSpacing: 2,
-                      mainAxisSpacing: 2,
-                    ),
+                          crossAxisCount: 7,
+                          childAspectRatio: 1.2,
+                          crossAxisSpacing: 2,
+                          mainAxisSpacing: 2,
+                        ),
                     itemCount: calendarState.visibleDays.length,
                     itemBuilder: (context, index) {
                       final day = calendarState.visibleDays[index];
                       final key = CalendarDateUtils.dateKey(day);
                       final dayEvents =
-                          (eventsByDate[key] as List<dynamic>?) ?? [];
+                          (eventsByDate[key] as List<CalendarEvent>?) ?? [];
                       final isCurrentMonth = CalendarDateUtils.isCurrentMonth(
                         day,
                         calendarState.focusedDate,
@@ -112,7 +115,7 @@ class _WeekDayHeader extends StatelessWidget {
 /// خلية اليوم الواحد
 class _DayCell extends StatelessWidget {
   final DateTime day;
-  final List<dynamic> events;
+  final List<CalendarEvent> events;
   final bool isCurrentMonth;
   final bool isToday;
   final bool isSelected;
@@ -141,13 +144,13 @@ class _DayCell extends StatelessWidget {
           color: isSelected
               ? Colors.white.withValues(alpha: 0.12)
               : isToday
-                  ? Colors.white.withValues(alpha: 0.06)
-                  : Colors.transparent,
+              ? Colors.white.withValues(alpha: 0.06)
+              : Colors.transparent,
           border: isToday
               ? Border.all(color: const Color(0xFF4A90D9), width: 1.5)
               : isSelected
-                  ? Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1)
-                  : null,
+              ? Border.all(color: Colors.white.withValues(alpha: 0.2), width: 1)
+              : null,
         ),
         child: Padding(
           padding: const EdgeInsets.all(4),
@@ -162,42 +165,65 @@ class _DayCell extends StatelessWidget {
                   height: 24,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color:
-                        isToday ? const Color(0xFF4A90D9) : Colors.transparent,
+                    color: isToday
+                        ? const Color(0xFF4A90D9)
+                        : Colors.transparent,
                   ),
                   child: Center(
                     child: Text(
                       '${day.day}',
                       style: TextStyle(
                         fontSize: 12,
-                        fontWeight:
-                            isToday ? FontWeight.bold : FontWeight.w400,
+                        fontWeight: isToday ? FontWeight.bold : FontWeight.w400,
                         color: isToday
                             ? Colors.white
                             : isCurrentMonth
-                                ? Colors.white.withValues(alpha: 0.9)
-                                : Colors.white.withValues(alpha: 0.25),
+                            ? Colors.white.withValues(alpha: 0.9)
+                            : Colors.white.withValues(alpha: 0.25),
                       ),
                     ),
                   ),
                 ),
               ),
-              // نقاط الأحداث
+              // أحداث اليوم
               if (events.isNotEmpty)
                 Expanded(
                   child: Padding(
                     padding: const EdgeInsets.only(top: 2),
-                    child: Column(
-                      children: events.take(3).map((e) {
-                        return Container(
-                          margin: const EdgeInsets.only(bottom: 1),
-                          height: 4,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(2),
-                            color: ColorUtils.fromValue(e.colorValue as int),
-                          ),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final maxRows = (constraints.maxHeight / 20)
+                            .floor()
+                            .clamp(1, 3);
+                        final hasMore = events.length > maxRows;
+                        final visibleCount = hasMore
+                            ? (maxRows - 1).clamp(1, maxRows)
+                            : maxRows;
+                        final visibleEvents = events.take(visibleCount);
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            ...visibleEvents.map(
+                              (event) => _MonthEventChip(event: event),
+                            ),
+                            if (hasMore)
+                              Padding(
+                                padding: const EdgeInsets.only(top: 1),
+                                child: Text(
+                                  '+${events.length - visibleCount} more',
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
+                                  style: TextStyle(
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white.withValues(alpha: 0.55),
+                                  ),
+                                ),
+                              ),
+                          ],
                         );
-                      }).toList(),
+                      },
                     ),
                   ),
                 ),
@@ -215,6 +241,74 @@ class _DayCell extends StatelessWidget {
     ).then((event) {
       if (event != null && context.mounted) {
         context.read<EventBloc>().add(AddEvent(event));
+      }
+    });
+  }
+}
+
+/// شريحة مصغرة تعرض اسم الحدث داخل العرض الشهري
+class _MonthEventChip extends StatelessWidget {
+  final CalendarEvent event;
+
+  const _MonthEventChip({required this.event});
+
+  @override
+  Widget build(BuildContext context) {
+    final color = ColorUtils.fromValue(event.colorValue);
+    final label = event.isAllDay
+        ? event.title
+        : '${CalendarDateUtils.formatTime(event.startTime)} ${event.title}';
+
+    return Tooltip(
+      message: event.title,
+      waitDuration: const Duration(milliseconds: 350),
+      child: GestureDetector(
+        onTap: () => _showEventDialog(context),
+        child: Container(
+          height: 18,
+          margin: const EdgeInsets.only(bottom: 2),
+          padding: const EdgeInsets.symmetric(horizontal: 5),
+          decoration: BoxDecoration(
+            color: color.withValues(alpha: 0.22),
+            borderRadius: BorderRadius.circular(5),
+            border: Border(left: BorderSide(color: color, width: 3)),
+          ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Text(
+              label,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: const TextStyle(
+                fontSize: 9.5,
+                height: 1,
+                fontWeight: FontWeight.w600,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _showEventDialog(BuildContext context) {
+    final categoryBloc = context.read<CategoryBloc>();
+    final eventBloc = context.read<EventBloc>();
+
+    showDialog(
+      context: context,
+      builder: (_) => BlocProvider.value(
+        value: categoryBloc,
+        child: EventDialog(event: event, initialDate: event.startTime),
+      ),
+    ).then((result) {
+      if (!context.mounted || result == null || result is! Map) return;
+
+      if (result['action'] == 'save') {
+        eventBloc.add(UpdateEvent(result['event']));
+      } else if (result['action'] == 'delete') {
+        eventBloc.add(DeleteEvent(event.id));
       }
     });
   }
@@ -272,7 +366,9 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
                   style: const TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: 'Event title...',
-                    hintStyle: TextStyle(color: Colors.white.withValues(alpha: 0.4)),
+                    hintStyle: TextStyle(
+                      color: Colors.white.withValues(alpha: 0.4),
+                    ),
                     filled: true,
                     fillColor: Colors.white.withValues(alpha: 0.07),
                     border: OutlineInputBorder(
@@ -290,8 +386,9 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
                       onPressed: () => Navigator.pop(context),
                       child: Text(
                         'Cancel',
-                        style:
-                            TextStyle(color: Colors.white.withValues(alpha: 0.6)),
+                        style: TextStyle(
+                          color: Colors.white.withValues(alpha: 0.6),
+                        ),
                       ),
                     ),
                     const SizedBox(width: 8),
@@ -303,8 +400,10 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
                           borderRadius: BorderRadius.circular(12),
                         ),
                       ),
-                      child: const Text('Add',
-                          style: TextStyle(color: Colors.white)),
+                      child: const Text(
+                        'Add',
+                        style: TextStyle(color: Colors.white),
+                      ),
                     ),
                   ],
                 ),
@@ -324,12 +423,18 @@ class _QuickAddEventDialogState extends State<_QuickAddEventDialog> {
         id: uuid.v4(),
         title: _titleController.text.trim(),
         startTime: DateTime(
-          widget.date.year, widget.date.month, widget.date.day,
-          now.hour, now.minute,
+          widget.date.year,
+          widget.date.month,
+          widget.date.day,
+          now.hour,
+          now.minute,
         ),
         endTime: DateTime(
-          widget.date.year, widget.date.month, widget.date.day,
-          now.hour + 1, now.minute,
+          widget.date.year,
+          widget.date.month,
+          widget.date.day,
+          now.hour + 1,
+          now.minute,
         ),
       );
       Navigator.pop(context, event);

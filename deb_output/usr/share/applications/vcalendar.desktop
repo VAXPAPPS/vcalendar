@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=vcalendar
+Comment=Flutter Application - vcalendar
+Exec=/usr/bin/vcalendar
+Icon=/usr/share/icons/hicolor/256x256/apps/vcalendar.png
+Terminal=false
+Categories=Utility;Development;
